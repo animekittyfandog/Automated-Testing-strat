@@ -67,13 +67,6 @@ jobs:
     - name: Install Cypress
       run: npm install cypress
 
-    - name: Insert sample violation for testing
-      run: |
-        mysql -h 127.0.0.1 -u root -proot parksense_test -e "
-        INSERT INTO violations (license_plate, violation_description, violation_time, vehicle_status)
-        VALUES ('TEST123', 'Test Violation', NOW(), 'registered');
-        "
-
     - name: Run Cypress UI tests
       env:
         CYPRESS_baseUrl: http://localhost:8000
