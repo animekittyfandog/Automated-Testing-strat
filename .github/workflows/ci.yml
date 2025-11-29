@@ -52,8 +52,7 @@ jobs:
 
     - name: Set up database schema and seed data
       run: |
-        mysql -h 127.0.0.1 -u root -proot parksense_test < tests/schema.sql
-        mysql -h 127.0.0.1 -u root -proot parksense_test < tests/seed.sql
+        mysql -h 127.0.0.1 -u root -proot parksense_test < parksense_db.sql
 
     - name: Start PHP built-in server
       run: |
