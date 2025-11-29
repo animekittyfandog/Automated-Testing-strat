@@ -1,0 +1,8 @@
+{
+  "name": "yourname/parksense",
+  "description": "ParkSense violation management system",
+  "require": {
+    "php": ">=7.4",
+    "ext-mysqli": "*"
+  }
+}

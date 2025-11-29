@@ -48,12 +48,6 @@ jobs:
       run: composer validate
 
     - name: Install Composer dependencies
-      run: |
-        cd backend
-        composer install --no-progress --no-suggest --prefer-dist --no-interaction --optimize-autoloader
-
-
-    - name: Install Composer dependencies
       run: composer install --no-progress --no-suggest --prefer-dist --no-interaction --optimize-autoloader
 
     - name: Set up database schema and seed data
