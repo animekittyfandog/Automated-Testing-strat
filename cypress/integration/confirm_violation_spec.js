@@ -1,6 +1,6 @@
 describe('Confirm Violation UI Test', () => {
   it('confirms a violation and archives it', () => {
-    cy.visit('../violation_history.php'); // Adjust path as needed
+    cy.visit('./violation_history.php'); // Adjust path as needed
 
     // Find the first Confirm button and click it
     cy.get('.confirm-btn').first().click();
