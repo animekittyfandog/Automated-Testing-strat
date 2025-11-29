@@ -18,14 +18,6 @@ describe('Confirm Violation UI Test', () => {
 
     // You can add assertions here to verify the violation was archived
   });
-
-  cy.get('body').then($body => {
-  if ($body.find('.confirm-btn').length) {
-    cy.log('Confirm button found');
-  } else {
-    cy.log('Confirm button NOT found');
-  }
-});
 });
 
 
