@@ -20,22 +20,24 @@ jobs:
           - 3306:3306
         options: >-
           --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
+          --health-interval=5s
           --health-timeout=5s
-          --health-retries=3
+          --health-retries=10
+          --health-start-period=20s
 
     steps:
     - uses: actions/checkout@v3
 
-    - name: Wait for MySQL to be ready
+    # Wait for MySQL health check to pass
+    - name: Wait for MySQL
       run: |
-        for i in {30..0}; do
-          if mysqladmin ping -h mysql -uroot -proot --silent; then
-            echo "MySQL is up"
+        for i in {1..30}; do
+          if docker ps --filter "health=healthy" | grep mysql; then
+            echo "MySQL is healthy"
             break
           fi
-          echo "Waiting for MySQL..."
-          sleep 1
+          echo "Waiting for MySQL to be healthy..."
+          sleep 2
         done
 
     - name: Set up PHP
@@ -50,24 +52,21 @@ jobs:
     - name: Install Composer dependencies
       run: composer install --no-progress --no-suggest --prefer-dist --no-interaction --optimize-autoloader
 
-    - name: Set up database schema and seed data
-      run: |
-        mysql -h mysql -u root -proot parksense_test < parksense_db.sql
+    - name: Set up database schema
+      run: mysql -h mysql -u root -proot parksense_test < parksense_db.sql
 
-    - name: Start PHP built-in server
-      run: |
-        php -S 0.0.0.0:8000 -t ./ > server.log 2>&1 &
-        sleep 5
+    - name: Start PHP server
+      run: php -S 0.0.0.0:8000 -t ./ > server.log 2>&1 &
 
     - name: Install Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '16'
+        node-version: 16
 
     - name: Install Cypress
       run: npm install cypress
 
-    - name: Run Cypress UI tests
+    - name: Run Cypress tests
       env:
         CYPRESS_baseUrl: http://localhost:8000
       run: npx cypress run
