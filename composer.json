@@ -1,16 +1,8 @@
 {
-    "name": "yourname/parksense",
-    "description": "ParkSense violation management system",
-    "require": {
-        "php": ">=7.4",
-        "ext-mysqli": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.5"  
-    },
-    "autoload": {
-        "psr-4": {
-            "ParkSense\\": "src/"
-        }
-    }
+  "name": "yourname/parksense",
+  "description": "ParkSense violation management system",
+  "require": {
+    "php": ">=7.4",
+    "ext-mysqli": "*"
+  }
 }
