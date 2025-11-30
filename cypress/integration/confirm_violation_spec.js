@@ -5,7 +5,7 @@ describe('Confirm Violation UI Test', () => {
 
   it('opens confirmation modal, confirms a violation, and archives it', () => {
     // Find the first confirm button and click it to open modal
-    cy.get('.confirm-btn', { timeout: 10000 }).first().click();
+    cy.get('.confirm-btn', { timeout: 30000 }).first().click();
 
     // Confirm modal should appear
     cy.get('#confirm-modal').should('be.visible');

@@ -54,10 +54,35 @@ jobs:
       run: |
         mysql -h 127.0.0.1 -u root -proot parksense_test < parksense_db.sql
 
+    # - name: Start PHP built-in server
+    #   run: |
+    #     php -S 0.0.0.0:8000 -t ./ > server.log 2>&1 &
+    #     sleep 20
+
     - name: Start PHP built-in server
       run: |
+        # Starts the server in the background
         php -S 0.0.0.0:8000 -t ./ > server.log 2>&1 &
-        sleep 20
+        echo "PHP Server started on port 8000."
+      # Set a step-level timeout to prevent infinite hangs
+      timeout-minutes: 1 
+
+    - name: ⏳ Wait for application page to be ready
+      run: |
+        echo "Waiting for http://localhost:8000/violation.php to return HTTP 200..."
+        for i in {60..0}; do # Increased wait time to 60 seconds for robustness
+          # Use 'curl' to check if the page returns a success code (HTTP 200)
+          if curl --output /dev/null --silent --head --fail http://localhost:8000/violation.php; then
+            echo "✅ Application page is up and serving data!"
+            break
+          fi
+          echo "Application not ready yet. Waiting..."
+          sleep 1
+          if [ $i -eq 0 ]; then
+             echo "Application failed to start within the timeout."
+             exit 1
+          fi
+        done
 
     - name: Check violation.php page
       run: curl http://localhost:8000/violation.php
