@@ -13,10 +13,9 @@ describe('Confirm Violation UI Test', () => {
     // Click the confirm button inside the modal
     cy.get('#confirm-confirm-btn').click();
 
-    // Optionally, check for success message or that the row is removed/reloaded
-    // cy.get('#confirm-modal').should('not.be.visible');
+    //Optionally, check for success message or that the row is removed/reloaded
+    cy.get('#confirm-modal').should('not.be.visible');
 
-    // You can add assertions here to verify the violation was archived
   });
 });
 
