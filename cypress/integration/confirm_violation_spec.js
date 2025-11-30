@@ -1,6 +1,6 @@
 describe('Confirm Violation UI Test', () => {
   beforeEach(() => {
-    cy.visit('/violation.php');
+    cy.visit('http://localhost:8000/violation.php');
   });
 
   it('opens confirmation modal, confirms a violation, and archives it', () => {
