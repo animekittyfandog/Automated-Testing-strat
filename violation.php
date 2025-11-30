@@ -1,6 +1,9 @@
 <?php 
 include 'db_connect.php'; 
 
+// Establishes the connection
+$mysqli = new mysqli("127.0.0.1", "root", "root", "parksense_test");
+
 // --- PAGINATION LOGIC ---
 $records_per_page = 10;
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
