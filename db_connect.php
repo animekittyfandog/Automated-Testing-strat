@@ -1,7 +1,7 @@
 <?php
 $servername = "127.0.0.1";
 $username = "root"; 
-$password = "";     
+$password = "root";     
 $dbname = "parksense_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname, 3306);
