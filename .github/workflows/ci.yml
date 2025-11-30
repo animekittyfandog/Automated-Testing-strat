@@ -53,6 +53,10 @@ jobs:
     - name: Install Composer dependencies
       run: composer install --no-progress --no-suggest --prefer-dist --no-interaction --optimize-autoloader
 
+    - name: Run PHPUnit tests
+      # This step must be executed *after* the Composer installation
+      run: ./vendor/bin/phpunit
+
     - name: Set up database schema and seed data
       run: |
         mysql -h 127.0.0.1 -u root -proot parksense_test < parksense_db.sql
