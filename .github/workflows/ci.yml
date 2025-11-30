@@ -99,4 +99,12 @@ jobs:
       env:
         CYPRESS_baseUrl: http://localhost:8889
       run: npx cypress run
-
+    
+    - name: 🔎 Display PHP Server Error Log
+      # Run this step even if Cypress failed (`if: always()`)
+      if: always() 
+      run: |
+        echo "--- Contents of server.log ---"
+        # The 'cat' command prints the content of the file to the log
+        cat server.log
+        echo "------------------------------"
